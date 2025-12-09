@@ -6,7 +6,6 @@ namespace Haeckel\TypeWrapper;
 
 final class NonNegativeInt implements IntConvertible, \Stringable
 {
-
     /**
      * @param non-negative-int $value
      *

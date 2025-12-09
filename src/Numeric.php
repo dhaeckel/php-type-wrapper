@@ -6,32 +6,22 @@ namespace Haeckel\TypeWrapper;
 
 final class Numeric implements FloatConvertible, \Stringable
 {
-    private readonly string $value;
-
     /**
-     * @param numeric-string|int|float $value
+     * @param numeric-string|float $value
      *
      * @throws \ValueError when value is not numeric
      *
      * @see \is_numeric()
      */
-    public function __construct(int|float|string $value)
+    public function __construct(public readonly int|float|string $value)
     {
         if (! \is_numeric($value)) {
             throw new \ValueError('value is not numeric');
         }
-        $this->value = (string) $value;
     }
 
     /**
-     * @param \PHP_ROUND_HALF_DOWN|\PHP_ROUND_HALF_EVEN|\PHP_ROUND_HALF_ODD|\PHP_ROUND_HALF_UP $roundMode
-     */
-    public function roundToInt(int $roundMode = \PHP_ROUND_HALF_UP): int
-    {
-        return (int) \round($this->toFloat(), mode: $roundMode);
-    }
-
-    /**
+     * phpcs:ignore Generic.Files.LineLength.MaxExceeded
      * @param \PHP_ROUND_HALF_DOWN|\PHP_ROUND_HALF_EVEN|\PHP_ROUND_HALF_ODD|\PHP_ROUND_HALF_UP $roundMode
      */
     public function round(int $precision = 0, int $roundMode = \PHP_ROUND_HALF_UP): self
@@ -41,7 +31,7 @@ final class Numeric implements FloatConvertible, \Stringable
 
     public function __toString(): string
     {
-        return $this->value;
+        return (string) $this->value;
     }
 
     public function toFloat(): float

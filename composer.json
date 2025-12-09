@@ -1,10 +1,11 @@
 {
     "name": "haeckel/type_wrapper",
-    "description": "Wrapper classes for builtin types for better type checking",
+    "description": "Simple Library, that provides wrappers around scalar types and arrays. They are inspired by the builtin phpDoc-Types of phpstan, bringing static analysis of phpstan and runtime safety in one.",
     "type": "library",
     "require-dev": {
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.5",
-        "phpstan/phpstan": "^2.1"
+        "squizlabs/php_codesniffer": "^4.0"
     },
     "license": "LGPL-3.0-or-later",
     "autoload": {
@@ -12,10 +13,14 @@
             "Haeckel\\TypeWrapper\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Haeckel\\TypeWrapper\\Test\\": "test/"
+        }
+    },
     "authors": [
         {
-            "name": "Dominik Häckel",
-            "email": "dh@dc.ag"
+            "name": "Dominik Häckel"
         }
     ],
     "require": {
@@ -51,5 +56,19 @@
             "@phpstan --no-progress",
             "@test --coverage-html .phpunit/html-coverage"
         ]
+    },
+     "archive": {
+        "exclude": [
+            "/test/",
+            "phpcs.xml.dist",
+            "phpstan.dist.neon",
+            "phpunit.xml",
+            ".gitignore",
+            ".githooks",
+            ".github"
+        ]
+    },
+    "config": {
+        "sort-packages": true
     }
 }
