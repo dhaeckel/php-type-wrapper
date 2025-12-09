@@ -1,0 +1,55 @@
+{
+    "name": "haeckel/type_wrapper",
+    "description": "Wrapper classes for builtin types for better type checking",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "phpstan/phpstan": "^2.1"
+    },
+    "license": "LGPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Haeckel\\TypeWrapper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dominik Häckel",
+            "email": "dh@dc.ag"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "scripts": {
+        "test": [
+            "@putenv XDEBUG_MODE=coverage",
+            "vendor/bin/phpunit"
+        ],
+         "testSilent": [
+            "@putenv XDEBUG_MODE=coverage",
+            "vendor/bin/phpunit --no-output 2> /dev/null"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan"
+        ],
+        "cs": [
+            "vendor/bin/phpcs src/"
+        ],
+        "cbf": [
+            "vendor/bin/phpcbf src/"
+        ],
+        "ci": [
+            "@cbf -q",
+            "@cs -q",
+            "@phpstan -q",
+            "@test --no-output"
+        ],
+        "local-ci": [
+            "@cbf",
+            "@cs",
+            "@phpstan --no-progress",
+            "@test --coverage-html .phpunit/html-coverage"
+        ]
+    }
+}
